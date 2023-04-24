@@ -43,3 +43,4 @@ D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\roll.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\run.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\wind.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\SplashFont.xnb
+D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\game_background_s.xnb

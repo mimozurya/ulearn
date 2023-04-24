@@ -9,7 +9,7 @@ using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace kroshka
 {
-    class Animation
+    public class Animation
     {
         Texture2D texture;
         float frameTime;
@@ -71,7 +71,7 @@ namespace kroshka
 
     }
 
-    class Character
+    public class Character
     {
         AnimationCharacter animationCharacter;
 
@@ -80,10 +80,10 @@ namespace kroshka
         Animation jumpAnim;
         Animation rollAnim;
 
-        bool isOnGround = true;
+        public bool isOnGround = true;
 
-        Vector2 position = new Vector2(50, 450);
-        Vector2 velocity;
+        public Vector2 position = new Vector2(50, 450);
+        public Vector2 velocity;
 
         public Character() { animationCharacter = new AnimationCharacter(); }
         public void Load(ContentManager content)

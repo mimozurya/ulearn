@@ -17,6 +17,8 @@ namespace kroshka
         private SpriteBatch spriteBatch;
         Stat Stat = Stat.Game;
         Character character;
+        Vector2 cameraPosition;
+        Texture2D gameBackground;
 
         public Game1()
         {
@@ -43,6 +45,8 @@ namespace kroshka
             SplashScreen.Font = Content.Load<SpriteFont>("SplashFont");
             Asteroids.Init (spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             Wind.Texture2D = Content.Load<Texture2D>("wind");
+            gameBackground = Content.Load<Texture2D>("game_background");
+            Vector2 cameraPosition = character.position;
             character.Load(Content);
         }
 
@@ -59,13 +63,35 @@ namespace kroshka
                     }
                     break;
                 case Stat.Game:
+
+                    const float cameraLerpFactor = 0.05f;
+                    const float cameraLimitX = 100f;
+                    const float cameraLimitY = 50f;
+                    Vector2 targetCameraPosition = new Vector2(
+                        character.position.X - graphics.GraphicsDevice.Viewport.Width / 2f,
+                        character.position.Y - graphics.GraphicsDevice.Viewport.Height / 2f
+                    );
+                    Vector2 clampedTargetCameraPosition = new Vector2(
+                        MathHelper.Clamp(targetCameraPosition.X, cameraLimitX, cameraLimitX - graphics.GraphicsDevice.Viewport.Width),
+                        MathHelper.Clamp(targetCameraPosition.Y, cameraLimitY, cameraLimitY - graphics.GraphicsDevice.Viewport.Height)
+                    );
+                    cameraPosition = new Vector2(
+                        character.position.X - graphics.GraphicsDevice.Viewport.Width / 2f,
+                        character.position.Y - graphics.GraphicsDevice.Viewport.Height / 2f
+                    );
+
+                    //cameraPosition = Vector2.Lerp(cameraPosition, targetCameraPosition, cameraLerpFactor);
+
+                    if (keyboardState.IsKeyDown(Keys.Escape)) Stat = Stat.SplashScreen;
+                    Asteroids.Update();
+                    character.Update();
                     break;
             }
-            character.Update();
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             SplashScreen.Update();
+            character.Update();
 
             base.Update(gameTime);
         }
@@ -73,16 +99,21 @@ namespace kroshka
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin();
-            switch(Stat)
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, Matrix.CreateTranslation(-cameraPosition.X, -cameraPosition.Y, 0f));
+
+            switch (Stat)
             {
                 case Stat.SplashScreen:
                     SplashScreen.Draw(spriteBatch);
                     break;
                 case Stat.Game:
+                    Vector2 backgroundOffset = new Vector2(-gameBackground.Width / 2f, -gameBackground.Height / 2f);
+                    Vector2 backgroundPositions = new Vector2(0f, 0f);
+                    spriteBatch.Draw(gameBackground, character.position + backgroundOffset, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                     Asteroids.Draw();
                     character.Draw(gameTime, spriteBatch);
                     break;
+
             }
             spriteBatch.End();
 
