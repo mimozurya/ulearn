@@ -2,8 +2,10 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 using System;
 using System.Drawing;
+using System.Security.Policy;
 using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
@@ -84,14 +86,25 @@ namespace kroshka
 
         public Vector2 position = new Vector2(50, 450);
         public Vector2 velocity;
+        Animation animation;
 
-        public Character() { animationCharacter = new AnimationCharacter(); }
+        public Character()
+        {
+            animationCharacter = new AnimationCharacter();
+            runAnim = null;
+            stayAnim = null;
+            jumpAnim = null;
+            rollAnim = null;
+            animation = null;
+        }
         public void Load(ContentManager content)
         {
             runAnim = new Animation(content.Load<Texture2D>("run"), 400, 0.08f, true);
             stayAnim = new Animation(content.Load<Texture2D>("idle"), 400, 0.2f, true);
             jumpAnim = new Animation(content.Load<Texture2D>("jump"), 400, 0.1f, false);
             rollAnim = new Animation(content.Load<Texture2D>("roll"), 400, 0.1f, false);
+            animation = stayAnim;
+            animationCharacter.PlayAnimation(stayAnim);
         }
         public void Update()
         {

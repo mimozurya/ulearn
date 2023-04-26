@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace kroshka
 {
@@ -19,6 +20,8 @@ namespace kroshka
         Character character;
         Vector2 cameraPosition;
         Texture2D gameBackground;
+        Level level;
+
 
         public Game1()
         {
@@ -33,6 +36,7 @@ namespace kroshka
             graphics.PreferredBackBufferHeight = 1080;
             graphics.IsFullScreen = false;
             character = new Character();
+            level = new Level();
             graphics.ApplyChanges();
 
             base.Initialize();
@@ -48,6 +52,7 @@ namespace kroshka
             gameBackground = Content.Load<Texture2D>("game_background");
             Vector2 cameraPosition = character.position;
             character.Load(Content);
+            level.Load(Content);
         }
 
         protected override void Update(GameTime gameTime)
@@ -80,11 +85,11 @@ namespace kroshka
                         character.position.Y - graphics.GraphicsDevice.Viewport.Height / 2f
                     );
 
-                    //cameraPosition = Vector2.Lerp(cameraPosition, targetCameraPosition, cameraLerpFactor);
-
-                    if (keyboardState.IsKeyDown(Keys.Escape)) Stat = Stat.SplashScreen;
                     Asteroids.Update();
                     character.Update();
+
+                    if (keyboardState.IsKeyDown(Keys.Escape)) Stat = Stat.SplashScreen;
+
                     break;
             }
 
@@ -112,6 +117,8 @@ namespace kroshka
                     spriteBatch.Draw(gameBackground, character.position + backgroundOffset, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                     Asteroids.Draw();
                     character.Draw(gameTime, spriteBatch);
+                    level.Draw(spriteBatch);
+
                     break;
 
             }
