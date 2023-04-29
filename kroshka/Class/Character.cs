@@ -70,12 +70,13 @@ namespace kroshka
             Rectangle rectangle = new Rectangle(frameIndex * Animation.FrameWidth, 0, Animation.FrameWidth, animation.FrameHeight);
             spriteBatch.Draw(Animation.Texture, position, rectangle, Color.White, 0f, Origin, 1f, spriteEffects, 0f);
         }
-
     }
 
     public class Character
     {
-        AnimationCharacter animationCharacter;
+        AnimationCharacter animationCharacter;      
+        internal AnimationCharacter AnimationCharacter { get { return animationCharacter; } }
+        // public Animation Animation { get { return animation; } }
 
         Animation runAnim;
         Animation stayAnim;
@@ -84,7 +85,7 @@ namespace kroshka
 
         public bool isOnGround = true;
 
-        public Vector2 position = new Vector2(50, 450);
+        public Vector2 position = new Vector2(50, 800);
         public Vector2 velocity;
         Animation animation;
 
@@ -110,9 +111,9 @@ namespace kroshka
         {
             position += velocity;
 
-            if (position.Y >= 450)
+            if (position.Y >= 800)
             {
-                position.Y = 450;
+                position.Y = 800;
                 isOnGround = true;
             }
             else

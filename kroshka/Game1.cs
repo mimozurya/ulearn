@@ -21,7 +21,7 @@ namespace kroshka
         Vector2 cameraPosition;
         Texture2D gameBackground;
         Level level;
-
+        private IGraphicsDeviceProvider graphicsDeviceProvider;
 
         public Game1()
         {
@@ -36,7 +36,7 @@ namespace kroshka
             graphics.PreferredBackBufferHeight = 1080;
             graphics.IsFullScreen = false;
             character = new Character();
-            level = new Level();
+            level = new Level(graphicsDeviceProvider);
             graphics.ApplyChanges();
 
             base.Initialize();
