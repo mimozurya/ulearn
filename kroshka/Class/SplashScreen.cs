@@ -14,7 +14,7 @@ namespace kroshka
         static int timeCounter = 0;
         static Color color;
         public static SpriteFont Font { get; set; }
-        static new Vector2 textPosition = new Vector2(100,100);
+        static new Vector2 textPosition = new Vector2(600,900);
 
         static public void Draw (SpriteBatch spriteBatch)
         {

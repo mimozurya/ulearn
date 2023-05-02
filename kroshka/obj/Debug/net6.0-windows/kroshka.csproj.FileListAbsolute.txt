@@ -36,16 +36,10 @@ D:\ulearn\ulearn\kroshka\obj\Debug\net6.0-windows\kroshka.pdb
 D:\ulearn\ulearn\kroshka\obj\Debug\net6.0-windows\kroshka.genruntimeconfig.cache
 D:\ulearn\ulearn\kroshka\obj\Debug\net6.0-windows\ref\kroshka.dll
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\background.xnb
-D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\game_background.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\idle.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\jump.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\roll.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\run.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\wind.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\SplashFont.xnb
-D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\game_background_s.xnb
-D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\test_platform.xnb
-D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\platform.xnb
-D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\level_test.xnb
-D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\design.xnb
-D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\level.xnb
+D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\game_background.xnb

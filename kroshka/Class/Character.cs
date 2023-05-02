@@ -2,10 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.Direct3D9;
 using System;
-using System.Drawing;
-using System.Security.Policy;
 using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
@@ -76,7 +73,6 @@ namespace kroshka
     {
         AnimationCharacter animationCharacter;      
         internal AnimationCharacter AnimationCharacter { get { return animationCharacter; } }
-        // public Animation Animation { get { return animation; } }
 
         Animation runAnim;
         Animation stayAnim;
@@ -84,8 +80,9 @@ namespace kroshka
         Animation rollAnim;
 
         public bool isOnGround = true;
+        public bool isRunning = false;
 
-        public Vector2 position = new Vector2(50, 800);
+        public Vector2 position = new Vector2(0, 1100);
         public Vector2 velocity;
         Animation animation;
 
@@ -103,7 +100,7 @@ namespace kroshka
             runAnim = new Animation(content.Load<Texture2D>("run"), 400, 0.08f, true);
             stayAnim = new Animation(content.Load<Texture2D>("idle"), 400, 0.2f, true);
             jumpAnim = new Animation(content.Load<Texture2D>("jump"), 400, 0.1f, false);
-            rollAnim = new Animation(content.Load<Texture2D>("roll"), 400, 0.1f, false);
+            rollAnim = new Animation(content.Load<Texture2D>("roll"), 400, 0.15f, true);
             animation = stayAnim;
             animationCharacter.PlayAnimation(stayAnim);
         }
@@ -111,60 +108,40 @@ namespace kroshka
         {
             position += velocity;
 
-            if (position.Y >= 800)
+            if (position.Y >= 1100)
             {
-                position.Y = 800;
+                position.Y = 1100;
                 isOnGround = true;
             }
             else
             {
-                velocity.Y += 0.5f;
+                velocity.Y += 0.35f;
                 isOnGround = false;
             }
 
-            if (velocity.X == 0f && isOnGround)
-                animationCharacter.PlayAnimation(stayAnim);
-            if (velocity.X != 0 && animationCharacter.Animation != runAnim)
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                animationCharacter.PlayAnimation(runAnim);
+                isRunning = true;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && isOnGround)
+
+            if (Keyboard.GetState().IsKeyDown(Keys.W) && isOnGround)
             {
                 velocity.Y = -15f;
-                isOnGround = false;
                 animationCharacter.PlayAnimation(jumpAnim);
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Down) && isOnGround)
+            else if (Keyboard.GetState().IsKeyDown(Keys.S) && isOnGround)
             {
                 velocity.Y = 0f;
-                isOnGround = false;
                 animationCharacter.PlayAnimation(rollAnim);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && isOnGround)
-            {
-                velocity.Y = -15f;
-                isOnGround = false;
-                animationCharacter.PlayAnimation(jumpAnim);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                velocity.X = 5f;
-                if (isOnGround)
-                    animationCharacter.PlayAnimation(runAnim);
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                velocity.X = -5f;
-                if (isOnGround)
-                    animationCharacter.PlayAnimation(runAnim);
-            }
-            else
+            else if (isOnGround)
             {
                 velocity.X = 0f;
-                if (isOnGround && velocity.X == 0f)
+                if (isRunning)
+                    animationCharacter.PlayAnimation(runAnim);
+                else
                     animationCharacter.PlayAnimation(stayAnim);
             }
-
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

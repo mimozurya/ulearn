@@ -20,8 +20,6 @@ namespace kroshka
         Character character;
         Vector2 cameraPosition;
         Texture2D gameBackground;
-        Level level;
-        private IGraphicsDeviceProvider graphicsDeviceProvider;
 
         public Game1()
         {
@@ -34,9 +32,8 @@ namespace kroshka
         {
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
             character = new Character();
-            level = new Level(graphicsDeviceProvider);
             graphics.ApplyChanges();
 
             base.Initialize();
@@ -52,7 +49,6 @@ namespace kroshka
             gameBackground = Content.Load<Texture2D>("game_background");
             Vector2 cameraPosition = character.position;
             character.Load(Content);
-            level.Load(Content);
         }
 
         protected override void Update(GameTime gameTime)
@@ -112,13 +108,12 @@ namespace kroshka
                     SplashScreen.Draw(spriteBatch);
                     break;
                 case Stat.Game:
-                    Vector2 backgroundOffset = new Vector2(-gameBackground.Width / 2f, -gameBackground.Height / 2f);
-                    Vector2 backgroundPositions = new Vector2(0f, 0f);
-                    spriteBatch.Draw(gameBackground, character.position + backgroundOffset, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-                    Asteroids.Draw();
-                    character.Draw(gameTime, spriteBatch);
-                    level.Draw(spriteBatch);
 
+                    Asteroids.Draw();
+                    Vector2 backgroundOffset = new Vector2(-gameBackground.Width / 2f, -gameBackground.Height / 2f);
+                    Vector2 backgroundPositions = new Vector2(-970f, 230f);
+                    spriteBatch.Draw(gameBackground, backgroundPositions, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                    character.Draw(gameTime, spriteBatch);
                     break;
 
             }
