@@ -71,7 +71,8 @@ namespace kroshka
 
     public class Character
     {
-        AnimationCharacter animationCharacter;      
+        Animation animation;
+        AnimationCharacter animationCharacter;
         internal AnimationCharacter AnimationCharacter { get { return animationCharacter; } }
 
         Animation runAnim;
@@ -84,7 +85,6 @@ namespace kroshka
 
         public Vector2 position = new Vector2(0, 1100);
         public Vector2 velocity;
-        Animation animation;
 
         public Character()
         {
@@ -136,7 +136,6 @@ namespace kroshka
             }
             else if (isOnGround)
             {
-                velocity.X = 0f;
                 if (isRunning)
                     animationCharacter.PlayAnimation(runAnim);
                 else

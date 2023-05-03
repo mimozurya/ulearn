@@ -44,8 +44,10 @@ namespace kroshka
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SplashScreen.Background = Content.Load<Texture2D>("background");
             SplashScreen.Font = Content.Load<SpriteFont>("SplashFont");
-            Asteroids.Init (spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-            Wind.Texture2D = Content.Load<Texture2D>("wind");
+            Asteroid.Init (spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            //Wind.Texture2D = Content.Load<Texture2D>("wind");
+            Bee.Texture2D = Content.Load<Texture2D>("bee_hardcore");
+            Cockroach.Texture2D = Content.Load<Texture2D>("cockroach_4x");
             gameBackground = Content.Load<Texture2D>("game_background");
             Vector2 cameraPosition = character.position;
             character.Load(Content);
@@ -58,14 +60,13 @@ namespace kroshka
             {
                 case Stat.SplashScreen:
                     SplashScreen.Update();
-                    if (keyboardState.IsKeyDown(Keys.Enter))
+                    if (keyboardState.IsKeyDown(Keys.Space))
                     {
                         Stat = Stat.Game;
                     }
                     break;
                 case Stat.Game:
 
-                    const float cameraLerpFactor = 0.05f;
                     const float cameraLimitX = 100f;
                     const float cameraLimitY = 50f;
                     Vector2 targetCameraPosition = new Vector2(
@@ -81,11 +82,12 @@ namespace kroshka
                         character.position.Y - graphics.GraphicsDevice.Viewport.Height / 2f
                     );
 
-                    Asteroids.Update();
                     character.Update();
+                    Asteroid.Update();
 
-                    if (keyboardState.IsKeyDown(Keys.Escape)) Stat = Stat.SplashScreen;
-
+                    break;
+                case Stat.Final:
+                    SplashScreen.Update();
                     break;
             }
 
@@ -109,11 +111,11 @@ namespace kroshka
                     break;
                 case Stat.Game:
 
-                    Asteroids.Draw();
                     Vector2 backgroundOffset = new Vector2(-gameBackground.Width / 2f, -gameBackground.Height / 2f);
                     Vector2 backgroundPositions = new Vector2(-970f, 230f);
                     spriteBatch.Draw(gameBackground, backgroundPositions, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                     character.Draw(gameTime, spriteBatch);
+                    Asteroid.Draw();
                     break;
 
             }

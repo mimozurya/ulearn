@@ -19,7 +19,7 @@ namespace kroshka
         static public void Draw (SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Background, Vector2.Zero, Color.White);
-            spriteBatch.DrawString(Font, "PRESS ENTER TO START", textPosition, color);
+            spriteBatch.DrawString(Font, "PRESS SPACE TO START", textPosition, color);
         }
 
         static public void Update()

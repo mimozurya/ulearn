@@ -43,3 +43,8 @@ D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\run.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\wind.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\SplashFont.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\game_background.xnb
+D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\bee.xnb
+D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\cockroach.xnb
+D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\bee_hardcore.xnb
+D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\cockroach_hardcore.xnb
+D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\cockroach_4x.xnb
