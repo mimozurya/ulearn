@@ -1,14 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace kroshka
 {
-    public class Bee
+    public class Bee : Collision
     {
         public Vector2 Pos { get; private set; }
         Vector2 dir;
@@ -25,25 +27,30 @@ namespace kroshka
         }
 
         Color color;
+
         public static Texture2D Texture2D { get; set; }
 
-        public Bee(Vector2 Pos, Vector2 Dir)
+        public Bee(Vector2 Pos, Vector2 Dir) : base(Texture2D)
         {
             this.Pos = Pos;
             this.Dir = Dir;
         }
 
-        public Bee()
+        public Bee() : base(Texture2D)
         {
             RandomSet();
         }
 
-        public Bee(Vector2 Dir)
+        public Bee(Vector2 Dir) : base(Texture2D)
         {
             this.Dir = Dir;
             RandomSet();
         }
 
+        public void Load(ContentManager content)
+        {
+            Texture2D = content.Load<Texture2D>("bee_game");
+        }
         public void Update()
         {
             Pos += Dir;

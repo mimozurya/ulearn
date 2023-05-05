@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using SamplerState = Microsoft.Xna.Framework.Graphics.SamplerState;
 
 namespace kroshka
 {
@@ -18,8 +19,12 @@ namespace kroshka
         private SpriteBatch spriteBatch;
         Stat Stat = Stat.Game;
         Character character;
+        Bee bee;
+        Cockroach cockroach;
         Vector2 cameraPosition;
         Texture2D gameBackground;
+        Texture2D diedBackground;
+        private List<Collision> _collisions;
 
         public Game1()
         {
@@ -34,6 +39,9 @@ namespace kroshka
             graphics.PreferredBackBufferHeight = 1080;
             graphics.IsFullScreen = true;
             character = new Character();
+            bee = new Bee();
+            cockroach = new Cockroach();
+            _collisions = new List<Collision>();
             graphics.ApplyChanges();
 
             base.Initialize();
@@ -44,13 +52,24 @@ namespace kroshka
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SplashScreen.Background = Content.Load<Texture2D>("background");
             SplashScreen.Font = Content.Load<SpriteFont>("SplashFont");
+            gameBackground = Content.Load<Texture2D>("game_background");
+            diedBackground = Content.Load<Texture2D>("died_background");
+            Vector2 cameraPosition = character.position;
             Asteroid.Init (spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             //Wind.Texture2D = Content.Load<Texture2D>("wind");
-            Bee.Texture2D = Content.Load<Texture2D>("bee_hardcore");
-            Cockroach.Texture2D = Content.Load<Texture2D>("cockroach_4x");
-            gameBackground = Content.Load<Texture2D>("game_background");
-            Vector2 cameraPosition = character.position;
+            bee.Load(Content);
+            cockroach.Load(Content);
             character.Load(Content);
+
+            Collision characterCollision = new Collision(Content.Load<Texture2D>("cockroach"));
+            _collisions.Add(characterCollision);
+
+            Collision beeCollision = new Collision(Content.Load<Texture2D>("bee"));
+            _collisions.Add(beeCollision);
+
+            Collision cockroachCollision = new Collision(Content.Load<Texture2D>("cockroach"));
+            _collisions.Add(cockroachCollision);
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -60,6 +79,12 @@ namespace kroshka
             {
                 case Stat.SplashScreen:
                     SplashScreen.Update();
+                    if (keyboardState.IsKeyDown(Keys.Space))
+                    {
+                        Stat = Stat.Game;
+                    }
+                    break;
+                case Stat.Final:
                     if (keyboardState.IsKeyDown(Keys.Space))
                     {
                         Stat = Stat.Game;
@@ -84,10 +109,11 @@ namespace kroshka
 
                     character.Update();
                     Asteroid.Update();
+                    foreach (var collision in _collisions)
+                        collision.Update(gameTime, _collisions);
+                    if (keyboardState.IsKeyDown(Keys.F))
+                        Stat = Stat.Final;
 
-                    break;
-                case Stat.Final:
-                    SplashScreen.Update();
                     break;
             }
 
@@ -109,13 +135,19 @@ namespace kroshka
                 case Stat.SplashScreen:
                     SplashScreen.Draw(spriteBatch);
                     break;
+                case Stat.Final:
+                    Vector2 diedBackgroundOffset = new Vector2(-diedBackground.Width / 2f, -diedBackground.Height / 2f);
+                    Vector2 diedBackgroundPositions = new Vector2(-970f, 550f);
+                    spriteBatch.Draw(diedBackground, diedBackgroundPositions, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                    break;
                 case Stat.Game:
-
                     Vector2 backgroundOffset = new Vector2(-gameBackground.Width / 2f, -gameBackground.Height / 2f);
                     Vector2 backgroundPositions = new Vector2(-970f, 230f);
                     spriteBatch.Draw(gameBackground, backgroundPositions, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
                     character.Draw(gameTime, spriteBatch);
                     Asteroid.Draw();
+                    foreach (var collision in _collisions)
+                        collision.Draw(spriteBatch);
                     break;
 
             }

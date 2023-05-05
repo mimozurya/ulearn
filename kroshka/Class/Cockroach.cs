@@ -1,14 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Color = Microsoft.Xna.Framework.Color;
 
 namespace kroshka
 {
-    public class Cockroach
+    public class Cockroach : Collision
     {
         public Vector2 Pos { get; private set; }
         Vector2 dir;
@@ -27,23 +30,27 @@ namespace kroshka
         Color color;
         public static Texture2D Texture2D { get; set; }
 
-        public Cockroach(Vector2 Pos, Vector2 Dir)
+        public Cockroach(Vector2 Pos, Vector2 Dir) : base(Texture2D)
         {
             this.Pos = Pos;
             this.Dir = Dir;
         }
 
-        public Cockroach()
+        public Cockroach() : base(Texture2D)
         {
             RandomSet();
         }
 
-        public Cockroach(Vector2 Dir)
+        public Cockroach(Vector2 Dir) : base(Texture2D)
         {
             this.Dir = Dir;
             RandomSet();
         }
 
+        public void Load(ContentManager content)
+        {
+            Texture2D = content.Load<Texture2D>("cockroach_game");
+        }
         public void Update()
         {
             Pos += Dir;

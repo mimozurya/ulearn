@@ -69,7 +69,7 @@ namespace kroshka
         }
     }
 
-    public class Character
+    public class Character : Collision
     {
         Animation animation;
         AnimationCharacter animationCharacter;
@@ -86,7 +86,7 @@ namespace kroshka
         public Vector2 position = new Vector2(0, 1100);
         public Vector2 velocity;
 
-        public Character()
+        public Character() : base()
         {
             animationCharacter = new AnimationCharacter();
             runAnim = null;

@@ -1,1 +1,8 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"D:/ulearn/ulearn/kroshka/Content/background.jpg","D:/ulearn/ulearn/kroshka/Content/bin/Windows/Content/background.xnb","TextureProcessor","Texture2DContent",316101,8294485,0,3742177
+"D:/ulearn/ulearn/kroshka/Content/bee_game.png","D:/ulearn/ulearn/kroshka/Content/bin/Windows/Content/bee_game.xnb","TextureProcessor","Texture2DContent",3931,691285,0,0155847
+"D:/ulearn/ulearn/kroshka/Content/bee.png","D:/ulearn/ulearn/kroshka/Content/bin/Windows/Content/bee.xnb","TextureProcessor","Texture2DContent",1309,19285,0,0017818
+"D:/ulearn/ulearn/kroshka/Content/cockroach_game.png","D:/ulearn/ulearn/kroshka/Content/bin/Windows/Content/cockroach_game.xnb","TextureProcessor","Texture2DContent",2275,307285,0,009158
+"D:/ulearn/ulearn/kroshka/Content/cockroach.png","D:/ulearn/ulearn/kroshka/Content/bin/Windows/Content/cockroach.xnb","TextureProcessor","Texture2DContent",1118,19285,0,0018516
+"D:/ulearn/ulearn/kroshka/Content/died_background_v3.png","D:/ulearn/ulearn/kroshka/Content/bin/Windows/Content/died_background.xnb","TextureProcessor","Texture2DContent",735562,8294485,0,2193801
+"D:/ulearn/ulearn/kroshka/Content/game_background.png","D:/ulearn/ulearn/kroshka/Content/bin/Windows/Content/game_background.xnb","TextureProcessor","Texture2DContent",1100003,14745685,0,3455997
