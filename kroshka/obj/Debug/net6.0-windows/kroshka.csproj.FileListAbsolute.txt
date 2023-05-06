@@ -48,3 +48,5 @@ D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\cockroach.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\died_background.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\bee_game.xnb
 D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\cockroach_game.xnb
+D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\music.wma
+D:\ulearn\ulearn\kroshka\bin\Debug\net6.0-windows\Content\music.xnb

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 using SamplerState = Microsoft.Xna.Framework.Graphics.SamplerState;
 
@@ -17,13 +18,14 @@ namespace kroshka
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        Stat Stat = Stat.Game;
+        Stat Stat = Stat.SplashScreen;
         Character character;
         Bee bee;
         Cockroach cockroach;
         Vector2 cameraPosition;
         Texture2D gameBackground;
         Texture2D diedBackground;
+        Song song;
         private List<Collision> _collisions;
 
         public Game1()
@@ -54,6 +56,7 @@ namespace kroshka
             SplashScreen.Font = Content.Load<SpriteFont>("SplashFont");
             gameBackground = Content.Load<Texture2D>("game_background");
             diedBackground = Content.Load<Texture2D>("died_background");
+            song = Content.Load<Song>("music");
             Vector2 cameraPosition = character.position;
             Asteroid.Init (spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             //Wind.Texture2D = Content.Load<Texture2D>("wind");
@@ -75,10 +78,11 @@ namespace kroshka
         protected override void Update(GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
-            switch(Stat)
+            switch (Stat)
             {
                 case Stat.SplashScreen:
                     SplashScreen.Update();
+                    MediaPlayer.Play(song);
                     if (keyboardState.IsKeyDown(Keys.Space))
                     {
                         Stat = Stat.Game;
